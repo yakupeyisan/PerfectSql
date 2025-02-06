@@ -475,7 +475,7 @@
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
-    "version": "2.1.4",
+    "version": "2.1.7",
     "restore": {
       "projectUniqueName": "D:\\Projects\\sources\\Simple\\PerfectSql\\PerfectSql.csproj",
       "projectName": "PerfectSql",

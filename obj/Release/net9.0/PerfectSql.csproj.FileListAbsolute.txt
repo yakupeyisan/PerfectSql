@@ -10,3 +10,4 @@ D:\Projects\sources\Simple\PerfectSql\obj\Release\net9.0\PerfectSql.dll
 D:\Projects\sources\Simple\PerfectSql\obj\Release\net9.0\refint\PerfectSql.dll
 D:\Projects\sources\Simple\PerfectSql\obj\Release\net9.0\PerfectSql.pdb
 D:\Projects\sources\Simple\PerfectSql\obj\Release\net9.0\ref\PerfectSql.dll
+D:\Projects\sources\Simple\PerfectSql\obj\Release\net9.0\PerfectSql.sourcelink.json

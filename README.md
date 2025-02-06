@@ -23,7 +23,7 @@ PerfectSql, NuGet üzerinden kolayca projeye dahil edilebilir. Ýlgili .NET sürümü
 ### .NET 9.0 Ýçin Kurulum
 .NET CLI kullanarak aþaðýdaki komutu çalýþtýrýn:
 ```bash
- dotnet add package PerfectSql --version 2.1.3
+ dotnet add package PerfectSql --version 2.1.7
 ```
 
 ---
@@ -41,7 +41,7 @@ PerfectSql ile MSSQL veritabaný iþlemlerinizi daha verimli ve esnek hale getireb
 NuGet paket yöneticisi konsolunu kullanarak paketi projenize ekleyebilirsiniz:
 
 ```bash
-NuGet\Install-Package PerfectSql -Version 2.1.3
+NuGet\Install-Package PerfectSql -Version 2.1.7
 ```
 
 ## Baþlarken
@@ -253,6 +253,47 @@ public class UserRules : BaseDMLRule<User>
 
 ```
 
+### List ekleme
+
+```csharp
+//Listeden Ekleme
+var newUserList=new List<User>()
+{
+    new(){ Name = "Alice", Age = 30 },
+    new(){ Name = "Bob", Age = 30 }
+};
+QueryBuilder<User>.Instance.Add(newUserList);
+
+QueryBuilder<AutoClean>.Instance.Add(list,(AutoClean record,Exception ex) =>
+{
+    //Kayýt eklenirken alýnan hatalar yer alýyor
+});
+
+
+```
+### Queue(kuyruk) üzerinden ekleme
+
+```csharp
+//Queue Ekleme
+new Task(async () =>
+{
+    var cancellationToken = new CancellationTokenSource();
+    new Task(async () => await QueryBuilder<User>.Instance.Add(queue, cancellationToken.Token)).Start();
+    while (true)
+    {
+        queue.Enqueue(new AutoClean()
+        {
+            Name = "Test",
+             Age = 30
+
+        });
+        await Task.Delay(10);
+    }
+
+}).Start();
+
+
+```
 
 
 ## Lisans
@@ -291,3 +332,16 @@ Bu proje MIT lisansý altýnda lisanslanmýþtýr. Daha fazla bilgi için [LICENSE](LI
 
 ---
 2.1.3 UnaryExpression desteði eklendi.
+
+---
+2.1.4 Bug fix giderildi.
+
+---
+2.1.5 Liste olarak ekleme ve queue ye abone olup ekleme eklendi
+
+
+---
+2.1.6 Update column default value bug fix
+
+---
+2.1.7 BaseDmlRules içerisine UnaryExpression desteði eklendi.

@@ -46,12 +46,22 @@ internal class RuleModel<T>
     }
     private static string GetPropertyName(Expression<Func<T, bool>> expression)
     {
-        if (expression.Body is BinaryExpression binaryExpression)
+        return GetPropertyName(expression.Body);
+    }
+    private static string GetPropertyName(Expression expression)
+    {
+        if (expression is MemberExpression memberExpression)
         {
-            if (binaryExpression.Left is MemberExpression memberExpression)
-            {
-                return memberExpression.Member.Name;
-            }
+            return memberExpression.Member.Name;
+        }
+        if (expression is UnaryExpression unaryExpression
+            && unaryExpression.Operand is MemberExpression memberExp)
+        {
+            return memberExp.Member.Name;
+        }
+        if (expression is BinaryExpression binaryExpression)
+        {
+            return GetPropertyName(binaryExpression.Left);
         }
         throw new ArgumentException("Geçersiz ifade!");
     }

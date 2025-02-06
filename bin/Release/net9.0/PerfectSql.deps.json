@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v9.0": {
-      "PerfectSql/2.1.4": {
+      "PerfectSql/2.1.7": {
         "dependencies": {
           "System.Data.SqlClient": "4.8.6"
         },
@@ -92,7 +92,7 @@
     }
   },
   "libraries": {
-    "PerfectSql/2.1.4": {
+    "PerfectSql/2.1.7": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

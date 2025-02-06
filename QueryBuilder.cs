@@ -1,9 +1,11 @@
 ﻿using PerfectSql.Base;
+using System.Collections.Concurrent;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text;
 
 namespace PerfectSql;
 
@@ -1018,12 +1020,84 @@ public class QueryBuilder<TEntity>
         string query = $"INSERT INTO {TableName} ({model.GetPropertiesSqlString()}) OUTPUT INSERTED.Id  VALUES ({model.GetValuesSqlKeyString()})";
         RunCommand(query, model);
     }
+    public void Add<T>(IEnumerable<T> models, Action<T, Exception> errorRecordAction = null)
+        where T : class, new()
+    {
+        foreach (var model in models)
+        {
+            try
+            {
+                Add(model);
+            }
+            catch (Exception ex)
+            {
+                if (errorRecordAction != null) errorRecordAction(model, ex);
+            }
+        }
+    }
+    public async Task Add<T>(ConcurrentQueue<T> queue, CancellationToken cancellationToken, Action<T, Exception> errorRecordAction = null)
+        where T : class, new()
+    {
+        while (!cancellationToken.IsCancellationRequested)
+        {
+            if (queue.TryDequeue(out T model))
+            {
+                try
+                {
+                    Add(model);
+                }
+                catch (Exception ex)
+                {
+                    if (errorRecordAction != null) errorRecordAction(model, ex);
+                }
+                continue;
+            }
+            await Task.Delay(100);
+        }
+    }
     public void Add<TModel, TRule>(TModel model, TRule rules)
         where TModel : class, new()
         where TRule : BaseDMLRule<TModel>, new()
     {
         rules.Run(model);
         Add(model);
+    }
+    public void Add<TModel, TRule>(IEnumerable<TModel> models, TRule rules, Action<TModel, TRule, Exception> errorRecordAction = null)
+        where TModel : class, new()
+        where TRule : BaseDMLRule<TModel>, new()
+    {
+        foreach (var model in models)
+        {
+            try
+            {
+                Add(model, rules);
+            }
+            catch (Exception ex)
+            {
+                if (errorRecordAction != null) errorRecordAction(model, rules, ex);
+            }
+        }
+    }
+    public async Task Add<TModel, TRule>(ConcurrentQueue<TModel> queue, TRule rules, CancellationToken cancellationToken, Action<TModel, TRule, Exception> errorRecordAction = null)
+        where TModel : class, new()
+        where TRule : BaseDMLRule<TModel>, new()
+    {
+        while (!cancellationToken.IsCancellationRequested)
+        {
+            if (queue.TryDequeue(out TModel model))
+            {
+                try
+                {
+                    Add(model, rules);
+                }
+                catch (Exception ex)
+                {
+                    if (errorRecordAction != null) errorRecordAction(model, rules, ex);
+                }
+                continue;
+            }
+            await Task.Delay(100);
+        }
     }
     public void Update<T>(T model)
         where T : class, new()
@@ -1092,7 +1166,8 @@ public class QueryBuilder<TEntity>
                             }
                             else if (prop.PropertyType == typeof(TimeSpan))
                             {
-                                command.Parameters.AddWithValue($"@{prop.Name}", (value as TimeSpan?)?.ToString("HH:mm:ss.fff") ?? "");
+                                var val = (value as TimeSpan?)?.ToString("c") ?? "";
+                                command.Parameters.AddWithValue($"@{prop.Name}",val);
                             }
                             else if (prop.PropertyType == typeof(bool))
                             {
@@ -1186,7 +1261,8 @@ public class QueryBuilder<TEntity>
         {
             if (!existingColumns.ContainsKey(newColumn.Key))
             {
-                alterCommands.Add($"ALTER TABLE [dbo].[{TableName}] ADD {newColumn.Value.RawDefinition}");
+                var defaultValue = newColumn.Value.DataType.Contains("int") ? "DEFAULT 0" : "DEFAULT ''";
+                alterCommands.Add($"ALTER TABLE [dbo].[{TableName}] ADD {newColumn.Value.RawDefinition} {defaultValue}");
             }
             else if (existingColumns[newColumn.Key].DataType != newColumn.Value.DataType)
             {

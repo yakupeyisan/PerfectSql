@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>PerfectSql</id>
-    <version>2.1.4</version>
+    <version>2.1.7</version>
     <authors>Yakup Eyisan</authors>
     <owners>Yakup Eyisan</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
