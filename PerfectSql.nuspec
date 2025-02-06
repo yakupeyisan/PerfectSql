@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>PerfectSql</id>
+    <version>2.1.4</version>
+    <authors>Yakup Eyisan</authors>
+    <owners>Yakup Eyisan</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Mssql için dinamik bir sorgu oluşturmak için kullanılabilir. Detaylar kısa süre içerisinde paylaşılacaktır.</description>
+    <tags>MSSQL, Query Builder, Migrator, c#</tags>
+  </metadata>
+  <files>
+    <file src="D:\Projects\sources\Simple\PerfectSql\README.md" target="docs\" />
+    <file src="D:\Projects\sources\Simple\PerfectSql\bin\Release\net9.0\PerfectSql.dll" target="lib\net9.0\PerfectSql.dll" />
+  </files>
+</package>

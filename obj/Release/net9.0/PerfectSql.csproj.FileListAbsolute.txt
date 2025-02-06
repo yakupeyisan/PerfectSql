@@ -1,0 +1,12 @@
+D:\Projects\sources\Simple\PerfectSql\bin\Release\net9.0\PerfectSql.deps.json
+D:\Projects\sources\Simple\PerfectSql\bin\Release\net9.0\PerfectSql.dll
+D:\Projects\sources\Simple\PerfectSql\bin\Release\net9.0\PerfectSql.pdb
+D:\Projects\sources\Simple\PerfectSql\obj\Release\net9.0\PerfectSql.csproj.AssemblyReference.cache
+D:\Projects\sources\Simple\PerfectSql\obj\Release\net9.0\PerfectSql.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\sources\Simple\PerfectSql\obj\Release\net9.0\PerfectSql.AssemblyInfoInputs.cache
+D:\Projects\sources\Simple\PerfectSql\obj\Release\net9.0\PerfectSql.AssemblyInfo.cs
+D:\Projects\sources\Simple\PerfectSql\obj\Release\net9.0\PerfectSql.csproj.CoreCompileInputs.cache
+D:\Projects\sources\Simple\PerfectSql\obj\Release\net9.0\PerfectSql.dll
+D:\Projects\sources\Simple\PerfectSql\obj\Release\net9.0\refint\PerfectSql.dll
+D:\Projects\sources\Simple\PerfectSql\obj\Release\net9.0\PerfectSql.pdb
+D:\Projects\sources\Simple\PerfectSql\obj\Release\net9.0\ref\PerfectSql.dll

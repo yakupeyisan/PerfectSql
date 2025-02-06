@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>PerfectSql</id>
+    <version>2.1.2</version>
+    <authors>PerfectSql</authors>
+    <description>Package Description</description>
+    <repository type="git" />
+    <dependencies>
+      <group targetFramework="net9.0">
+        <dependency id="System.Data.SqlClient" version="4.8.6" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="D:\Projects\sources\Simple\PerfectSql\bin\Release\net9.0\PerfectSql.dll" target="lib\net9.0\PerfectSql.dll" />
+  </files>
+</package>
