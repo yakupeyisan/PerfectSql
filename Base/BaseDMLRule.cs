@@ -63,6 +63,11 @@ internal class RuleModel<T>
         {
             return GetPropertyName(binaryExpression.Left);
         }
+        if (expression is MethodCallExpression methodCallExpression
+            && methodCallExpression.Arguments.FirstOrDefault() is MemberExpression memberExpr)
+        {
+            return memberExpr.Member.Name;
+        }
         throw new ArgumentException("Geçersiz ifade!");
     }
 }

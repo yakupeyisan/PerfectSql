@@ -23,7 +23,7 @@ PerfectSql, NuGet üzerinden kolayca projeye dahil edilebilir. Ýlgili .NET sürümü
 ### .NET 9.0 Ýçin Kurulum
 .NET CLI kullanarak aþaðýdaki komutu çalýþtýrýn:
 ```bash
- dotnet add package PerfectSql --version 2.1.7
+ dotnet add package PerfectSql --version 2.1.8
 ```
 
 ---
@@ -41,7 +41,7 @@ PerfectSql ile MSSQL veritabaný iþlemlerinizi daha verimli ve esnek hale getireb
 NuGet paket yöneticisi konsolunu kullanarak paketi projenize ekleyebilirsiniz:
 
 ```bash
-NuGet\Install-Package PerfectSql -Version 2.1.7
+NuGet\Install-Package PerfectSql -Version 2.1.8
 ```
 
 ## Baþlarken
@@ -345,3 +345,6 @@ Bu proje MIT lisansý altýnda lisanslanmýþtýr. Daha fazla bilgi için [LICENSE](LI
 
 ---
 2.1.7 BaseDmlRules içerisine UnaryExpression desteði eklendi.
+
+---
+2.1.8 BaseDmlRules içerisine MethodCallExpression desteði eklendi.
